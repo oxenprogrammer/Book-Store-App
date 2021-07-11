@@ -1,5 +1,5 @@
-const BookList = () => {
-  return <div className="BookList">BookList Container Component</div>;
+const BooksList = () => {
+  return <div className="BooksList">BooksList Container Component</div>;
 };
 
-export default BookList;
+export default BooksList;
