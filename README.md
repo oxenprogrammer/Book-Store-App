@@ -20,10 +20,10 @@ To get a local copy up and running follow these simple example steps.
 1. ``` git clone  ```
 2. ``` cd Book-Store-App ```
 3. ``` git checkout  feature/milestone-1```
-4. ``` yarn ```
-5. ``` yarn dev``` to run the server in development mode and server will open at `localhost:3000`.
-6. ```yarn build ``` to create an optimized production build.
-7. ``` yarn start ``` to run the production build locally.
+4. ``` npm i ```
+5. ``` npm run dev``` to run the server in development mode and server will open at `localhost:3000`.
+6. ```npm run build ``` to create an optimized production build.
+7. ``` npm run start ``` to run the production build locally.
 8. Open your favorite browser @ ```127.0.0.1:8080```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
