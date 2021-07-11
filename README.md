@@ -10,7 +10,7 @@ This is a simple Book Store React/Redux App. The purpose of this project is to u
 
 ## Live Demo
 
-[Live Demo Link](https://simple-calculator-okello.herokuapp.com/)
+[Live Demo Link](https://book-store-uganda.herokuapp.com/)
 
 
 ## Getting Started
