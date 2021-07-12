@@ -4,34 +4,33 @@ import App from "./components/App";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
+import { StrictMode } from "react";
 import { createStore } from "redux";
 import { reducer } from "./reducers";
 import reportWebVitals from "./reportWebVitals";
 
-const randomId = () => Math.floor(Math.random() * 1000);
-
 const initialState = {
   books: [
     {
-      id: randomId,
+      id: Math.floor(Math.random() * 1000),
       title: "Enter the Dragon",
       category: "Action",
       pages: 34,
-      read: false,
+      read: "No",
     },
     {
-      id: randomId,
+      id: Math.floor(Math.random() * 1000),
       title: "Eastern Condors",
       category: "History",
       pages: 74,
-      read: false,
+      read: "No",
     },
     {
-      id: randomId,
+      id: Math.floor(Math.random() * 1000),
       title: "The Big Boss",
       category: "Action",
       pages: 84,
-      read: true,
+      read: "Yes",
     },
   ],
 };
@@ -39,13 +38,18 @@ const initialState = {
 const store = createStore(
   reducer,
   initialState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  typeof window === "object" &&
+    typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    : (f) => f
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </StrictMode>,
   document.getElementById("root")
 );
 
