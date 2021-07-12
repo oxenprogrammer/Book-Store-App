@@ -10,7 +10,7 @@ export const books = (state = [], action) => {
           title: action.Book.title,
           category: action.Book.category,
           pages: action.Book.pages,
-          read: action.Book.read,
+          read: "No",
         },
       ];
     case REMOVE_BOOK:
