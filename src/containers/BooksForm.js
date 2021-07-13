@@ -21,17 +21,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BooksForm = () => {
-  const categories = [
-    "Action",
-    "Biography",
-    "History",
-    "Horror",
-    "Kids",
-    "Learning",
-    "Sci-Fi",
-  ];
+export const categories = [
+  "All",
+  "Action",
+  "Biography",
+  "History",
+  "Horror",
+  "Kids",
+  "Learning",
+  "Sci-Fi",
+];
 
+const BooksForm = () => {
   const dispatch = useDispatch();
 
   const [book, setBook] = useState("");

@@ -7,14 +7,15 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import { changeFilter, removeBook } from "../actions/index";
 import { connect, useDispatch } from "react-redux";
 
 import { Book } from "../components/Book";
+import { CategoryFilter } from "../components/CategoryFilter";
 import { Notification } from "./Notification";
 import Paper from "@material-ui/core/Paper";
-import { removeBook } from "../actions/index";
 
-const BooksList = ({ books }) => {
+const BooksList = ({ books, filter }) => {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
@@ -23,8 +24,8 @@ const BooksList = ({ books }) => {
 
   const dispatch = useDispatch();
 
-  const handleRemoveBook = async (bookId) => {
-    await dispatch(removeBook(bookId));
+  const handleRemoveBook = (bookId) => {
+    dispatch(removeBook(bookId));
     setNotify({
       isOpen: true,
       message: `Successfully Removed the Book with ID ${bookId}`,
@@ -32,8 +33,13 @@ const BooksList = ({ books }) => {
     });
   };
 
+  const handleFilterChange = ({ target: { value } }) => {
+    dispatch(changeFilter(value));
+  };
+
   return (
     <Fragment>
+      <CategoryFilter handleChange={handleFilterChange} />
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -47,19 +53,35 @@ const BooksList = ({ books }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {books.map((book) => (
-              <TableRow key={book.id}>
-                <Book
-                  key={book.id}
-                  id={book.id}
-                  title={book.title}
-                  category={book.category}
-                  pages={book.pages}
-                  read={book.read}
-                  handleRemoveBook={handleRemoveBook}
-                />
-              </TableRow>
-            ))}
+            {filter === "All"
+              ? books.map((book) => (
+                  <TableRow key={book.id}>
+                    <Book
+                      key={book.id}
+                      id={book.id}
+                      title={book.title}
+                      category={book.category}
+                      pages={book.pages}
+                      read={book.read}
+                      handleRemoveBook={handleRemoveBook}
+                    />
+                  </TableRow>
+                ))
+              : books
+                  .filter((book) => book.category === filter)
+                  .map((book) => (
+                    <TableRow key={book.id}>
+                      <Book
+                        key={book.id}
+                        id={book.id}
+                        title={book.title}
+                        category={book.category}
+                        pages={book.pages}
+                        read={book.read}
+                        handleRemoveBook={handleRemoveBook}
+                      />
+                    </TableRow>
+                  ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -68,5 +90,8 @@ const BooksList = ({ books }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ books: state.books });
+const mapStateToProps = (state) => ({
+  books: state.books,
+  filter: state.filterReducer,
+});
 export default connect(mapStateToProps, null)(BooksList);
