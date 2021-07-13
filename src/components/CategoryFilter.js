@@ -1,27 +1,19 @@
-import {
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select as MuiSelect,
-} from '@material-ui/core';
+import PropTypes from "prop-types";
+import React from "react";
+import { categories } from "../containers/BooksForm";
 
-import React from 'react';
-
-export const CategoryFilter = (props) => {
-  const { name, value, label, error = null, onChange, options, ...others } = props;
+export const CategoryFilter = ({ handleChange }) => {
   return (
-    <FormControl variant="outlined" {...(error && { error: true })}>
-      <InputLabel>{label}</InputLabel>
-      <MuiSelect name={name} label={label} value={value} onChange={onChange} {...others}>
-        <MenuItem value="All">None</MenuItem>
-        {options?.map((item) => (
-          <MenuItem key={item.dataId} value={item.dataId}>
-            {item.dataDes}``
-          </MenuItem>
-        ))}
-      </MuiSelect>
-      {error && <FormHelperText>{error}</FormHelperText>}
-    </FormControl>
+    <select onBlur={handleChange} onChange={handleChange}>
+      {categories.map((value) => (
+        <option value={value} key={value}>
+          {value}
+        </option>
+      ))}
+    </select>
   );
+};
+
+CategoryFilter.propTypes = {
+  handleChange: PropTypes.func.isRequired,
 };
