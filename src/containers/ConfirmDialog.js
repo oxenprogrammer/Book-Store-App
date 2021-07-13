@@ -44,7 +44,13 @@ export const ConfirmDialog = (props) => {
         <Button
           className={classes.defaultButton}
           color="primary"
-          onClick={onConfirm}
+          onClick={() => {
+            onConfirm(confirmDialog.bookId);
+            setConfirmDialog({
+              ...confirmDialog,
+              bookId: "",
+            });
+          }}
         >
           Yes
         </Button>
