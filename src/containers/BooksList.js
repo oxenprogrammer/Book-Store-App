@@ -9,21 +9,12 @@ import {
 } from "@material-ui/core";
 import { connect, useDispatch } from "react-redux";
 
-import { ActionButton } from "./ActionButton";
 import { Book } from "../components/Book";
-import CloseIcon from "@material-ui/icons/Close";
-import { ConfirmDialog } from "./ConfirmDialog";
 import { Notification } from "./Notification";
 import Paper from "@material-ui/core/Paper";
 import { removeBook } from "../actions/index";
 
 const BooksList = ({ books }) => {
-  const [confirmDialog, setConfirmDialog] = useState({
-    isOpen: false,
-    title: "",
-    subTitle: "",
-    bookId: "",
-  });
 
   const [notify, setNotify] = useState({
     isOpen: false,
@@ -35,10 +26,6 @@ const BooksList = ({ books }) => {
 
   const handleRemoveBook = async (bookId) => {
     await dispatch(removeBook(bookId));
-    setConfirmDialog({
-      ...confirmDialog,
-      isOpen: false,
-    });
     setNotify({
       isOpen: true,
       message: `Successfully Removed the Book with ID ${bookId}`,
@@ -70,32 +57,13 @@ const BooksList = ({ books }) => {
                   category={book.category}
                   pages={book.pages}
                   read={book.read}
+                  handleRemoveBook={handleRemoveBook}
                 />
-                <TableCell>
-                  <ActionButton
-                    color="secondary"
-                    onClick={() => {
-                      setConfirmDialog({
-                        isOpen: true,
-                        title: "Are You Sure You want to Remove this Book?",
-                        subTitle: "You cannot undo this change",
-                        bookId: book.id,
-                      });
-                    }}
-                  >
-                    <CloseIcon fontSize="small" />
-                  </ActionButton>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <ConfirmDialog
-        onConfirm={handleRemoveBook}
-        confirmDialog={confirmDialog}
-        setConfirmDialog={setConfirmDialog}
-      />
       <Notification notify={notify} setNotify={setNotify} />
     </Fragment>
   );
