@@ -1,15 +1,15 @@
+import { Fragment } from "react";
 import PropTypes from "prop-types";
 import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
 
 export const Book = ({ id, title, category, pages, read }) => (
-  <TableRow>
+  <Fragment>
     <TableCell>{id}</TableCell>
     <TableCell>{title}</TableCell>
     <TableCell>{category}</TableCell>
     <TableCell>{pages}</TableCell>
     <TableCell>{read}</TableCell>
-  </TableRow>
+  </Fragment>
 );
 
 Book.propTypes = {
