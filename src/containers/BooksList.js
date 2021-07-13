@@ -15,7 +15,6 @@ import Paper from "@material-ui/core/Paper";
 import { removeBook } from "../actions/index";
 
 const BooksList = ({ books }) => {
-
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
