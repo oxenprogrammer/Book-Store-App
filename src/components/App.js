@@ -4,8 +4,8 @@ import BooksList from "../containers/BooksList";
 const App = () => {
   return (
     <div className="App">
-      <BooksList />
       <BooksForm />
+      <BooksList />
     </div>
   );
 };

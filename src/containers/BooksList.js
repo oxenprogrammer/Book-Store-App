@@ -13,6 +13,7 @@ import { ActionButton } from "./ActionButton";
 import { Book } from "../components/Book";
 import CloseIcon from "@material-ui/icons/Close";
 import { ConfirmDialog } from "./ConfirmDialog";
+import { Notification } from "./Notification";
 import Paper from "@material-ui/core/Paper";
 import { removeBook } from "../actions/index";
 
@@ -24,13 +25,24 @@ const BooksList = ({ books }) => {
     bookId: "",
   });
 
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
   const dispatch = useDispatch();
 
-  const handleRemoveBook = async (book) => {
-    await dispatch(removeBook(book));
+  const handleRemoveBook = async (bookId) => {
+    await dispatch(removeBook(bookId));
     setConfirmDialog({
       ...confirmDialog,
       isOpen: false,
+    });
+    setNotify({
+      isOpen: true,
+      message: `Successfully Removed the Book with ID ${bookId}`,
+      type: "info",
     });
   };
 
@@ -84,6 +96,7 @@ const BooksList = ({ books }) => {
         confirmDialog={confirmDialog}
         setConfirmDialog={setConfirmDialog}
       />
+      <Notification notify={notify} setNotify={setNotify} />
     </Fragment>
   );
 };
