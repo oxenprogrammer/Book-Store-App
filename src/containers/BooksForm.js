@@ -6,7 +6,9 @@ import {
   Select,
   TextField,
 } from "@material-ui/core";
+import { connect, useDispatch } from "react-redux";
 
+import { addBook } from "../actions";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 
@@ -30,30 +32,46 @@ const BooksForm = () => {
     "Sci-Fi",
   ];
 
-  const [category, setCategory] = useState();
+  const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    setCategory(event.target.value);
+  const [book, setBook] = useState("");
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    setBook({ ...book, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addBook(book));
+    setBook("");
   };
 
   const classes = useStyles();
 
   return (
-    <form className={classes.root} noValidate autoComplete="off">
+    <form
+      onSubmit={handleSubmit}
+      className={classes.root}
+      noValidate
+      autoComplete="off"
+    >
       <TextField
         type="text"
         id="title"
         name="title"
         label="Book Title"
         variant="filled"
+        onChange={handleChange}
       />
       <FormControl variant="filled" className={classes.formControl}>
         <InputLabel id="category">Category</InputLabel>
         <Select
+          name="category"
           labelId="category"
           id="category"
-          value={category}
           onChange={handleChange}
+          onBlur={handleChange}
           defaultValue="Action"
         >
           {categories.map((cat) => (
@@ -69,6 +87,7 @@ const BooksForm = () => {
         name="pages"
         label="Number of Pages"
         variant="filled"
+        onChange={handleChange}
       />
       <Button type="submit" variant="contained" color="primary">
         Add Book
@@ -77,4 +96,4 @@ const BooksForm = () => {
   );
 };
 
-export default BooksForm;
+export default connect(null)(BooksForm);
