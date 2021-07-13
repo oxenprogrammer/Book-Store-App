@@ -7,20 +7,33 @@ import {
   TableHead,
   TableRow,
 } from "@material-ui/core";
+import { connect, useDispatch } from "react-redux";
 
 import { ActionButton } from "./ActionButton";
 import { Book } from "../components/Book";
 import CloseIcon from "@material-ui/icons/Close";
 import { ConfirmDialog } from "./ConfirmDialog";
 import Paper from "@material-ui/core/Paper";
-import { connect } from "react-redux";
+import { removeBook } from "../actions/index";
 
 const BooksList = ({ books }) => {
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
     title: "",
     subTitle: "",
+    bookId: "",
   });
+
+  const dispatch = useDispatch();
+
+  const handleRemoveBook = async (book) => {
+    await dispatch(removeBook(book));
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
+  };
+
   return (
     <Fragment>
       <TableContainer component={Paper}>
@@ -54,6 +67,7 @@ const BooksList = ({ books }) => {
                         isOpen: true,
                         title: "Are You Sure You want to Remove this Book?",
                         subTitle: "You cannot undo this change",
+                        bookId: book.id,
                       });
                     }}
                   >
@@ -62,34 +76,11 @@ const BooksList = ({ books }) => {
                 </TableCell>
               </TableRow>
             ))}
-            {/* {books.map((book) => (
-              <Book
-                key={book.id}
-                id={book.id}
-                title={book.title}
-                category={book.category}
-                pages={book.pages}
-                read={book.read}
-              />
-            ))}
-            <TableCell>
-              <ActionButton
-                color="secondary"
-                onClick={() => {
-                  setConfirmDialog({
-                    isOpen: true,
-                    title: "Are You Sure You want to Delete Patient?",
-                    subTitle: "You cannot undo this change",
-                  });
-                }}
-              >
-                <CloseIcon fontSize="small" />
-              </ActionButton>
-            </TableCell> */}
           </TableBody>
         </Table>
       </TableContainer>
       <ConfirmDialog
+        onConfirm={handleRemoveBook}
         confirmDialog={confirmDialog}
         setConfirmDialog={setConfirmDialog}
       />
