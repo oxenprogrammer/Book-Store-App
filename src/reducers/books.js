@@ -12,8 +12,9 @@ export const books = (state = [], action) => {
       read = book.read;
       return [...state, { id, read, title, pages, category }];
     }
-    case REMOVE_BOOK:
-      return state.filter((book) => book.id !== action.id);
+    case REMOVE_BOOK: {
+      return state.filter((book) => book.id !== action.payload);
+    }
     default:
       return state;
   }
