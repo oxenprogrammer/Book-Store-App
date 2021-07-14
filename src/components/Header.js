@@ -5,24 +5,23 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import React, { memo } from "react";
+import React, { Fragment, memo } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import App from "./App";
 import Categories from "./Categories";
-import HomeComponent from "./Home.component";
+import Icon from "@material-ui/core/Icon";
 
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: "#ffffff",
     height: "5.938rem",
+    display: "flex",
   },
   bookStoreCMS: {
-    width: "100rem",
-    height: "89.625rem",
-    padding: "9.313rem 3.75rem 7.688rem 6.25rem",
+    padding: "0 3.75rem 0 4.25rem",
     color: "#0290ff",
-    fontSize: '1.8rem',
+    fontSize: "1.8rem",
     fontWeight: "bolder",
   },
   link: {
@@ -37,6 +36,13 @@ const useStyles = makeStyles(() => ({
     lineHeight: "normal",
     letterSpacing: 1.9,
   },
+  user: {
+    color: "#0290ff",
+    marginLeft: "48rem",
+    "@media(max-width: 1024px)": {
+      marginLeft: "10rem",
+    },
+  },
 }));
 
 // eslint-disable-next-line react/display-name
@@ -47,24 +53,26 @@ const Header = memo(() => {
       <main>
         <AppBar position="static">
           <Toolbar className={classes.root} variant="dense">
-            <Typography variant="h6" color="inherit">
-              <Link className={classes.bookStoreCMS} href="/">
-                BookStore CMS
-              </Link>
-            </Typography>
-            <Typography>
-              <Link className={classes.link} href="/books">
-                Books
-              </Link>
-              <Link className={classes.link} href="/categories">
-                Categories
-              </Link>
-            </Typography>
+            <Fragment>
+              <Typography variant="h6" color="inherit">
+                <Link className={classes.bookStoreCMS} href="#">
+                  BookStore CMS
+                </Link>
+              </Typography>
+              <Typography>
+                <Link className={classes.link} href="/">
+                  Books
+                </Link>
+                <Link className={classes.link} href="/categories">
+                  Categories
+                </Link>
+              </Typography>
+            </Fragment>
+            <Icon className={["fas fa-user", classes.user]} />
           </Toolbar>
         </AppBar>
         <Switch>
-          <Route path="/" exact component={HomeComponent} />
-          <Route path="/books" component={App} />
+          <Route path="/" exact component={App} />
           <Route path="/categories" component={Categories} />
         </Switch>
       </main>

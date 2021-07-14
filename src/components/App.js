@@ -4,9 +4,9 @@ import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   root: {
-    margin: '0 7.8rem',
-  }
-}))
+    margin: "0 5.25rem",
+  },
+}));
 const App = () => {
   const classes = useStyles();
   return (

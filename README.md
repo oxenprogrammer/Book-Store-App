@@ -1,6 +1,9 @@
 ## Book Store App
 This is a simple Book Store React/Redux App. The purpose of this project is to use React and Redux to build a professional Book Store app where users perform CRUD operations.
 
+## Screenshot
+![Screenshot](./Screenshoot.png)
+
 ## Technology
 - ReactJs
 - Redux
