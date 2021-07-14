@@ -1,6 +1,6 @@
 import "./index.css";
 
-import App from "./components/App";
+import Header from "./components/Header";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -47,7 +47,7 @@ const store = createStore(
 ReactDOM.render(
   <StrictMode>
     <Provider store={store}>
-      <App />
+      <Header />
     </Provider>
   </StrictMode>,
   document.getElementById("root")
