@@ -151,7 +151,7 @@ const Header = memo(() => {
                     Categories
                   </Link>
                 </Typography>
-                <Icon className={["fas fa-user", classes.user]} />
+                <Icon className={("fas fa-user", classes.user)} />
               </>
             )}
           </Toolbar>
