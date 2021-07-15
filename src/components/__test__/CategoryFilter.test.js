@@ -19,7 +19,10 @@ describe("Header Component", () => {
 
   it("should render the Navbar", () => {
     act(() => {
-      renderWithState(<CategoryFilter handleChange={() => console.log('works')} />, container);
+      renderWithState(
+        <CategoryFilter handleChange={() => console.log("works")} />,
+        container
+      );
     });
     expect(container).toBeDefined();
   });
