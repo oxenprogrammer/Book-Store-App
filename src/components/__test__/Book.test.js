@@ -1,9 +1,5 @@
-import { render } from "@testing-library/react";
-
 import { Book } from "../Book";
-import { createStore } from "redux";
-import { reducer } from "../../reducers";
-import { Provider } from "react-redux";
+import { renderWithState } from "../../utils/testHelper";
 
 const initialState = {
   books: [
@@ -17,13 +13,9 @@ const initialState = {
   ],
 };
 
-const store = createStore(reducer, initialState);
-
-const Wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;
-
 describe("Book", () => {
   it("should have a Book", async () => {
-    const book = render(<Book />, { wrapper: Wrapper });
+    const book = renderWithState(<Book />, { initialState });
     expect(book).toBeTruthy();
   });
 });

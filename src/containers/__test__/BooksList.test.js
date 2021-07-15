@@ -1,9 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 
 import BooksList from "../BooksList";
-import { createStore } from "redux";
-import { reducer } from "../../reducers";
-import { Provider } from "react-redux";
+import { renderWithState } from "../../utils/testHelper";
 
 const initialState = {
   books: [
@@ -31,13 +29,9 @@ const initialState = {
   ],
 };
 
-const store = createStore(reducer, initialState);
-
-const Wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;
-
 describe("Book", () => {
-  it("should have a Book", async () => {
-    render(<BooksList />, { wrapper: Wrapper });
+  it("should have a BooksList", async () => {
+    renderWithState(<BooksList />, { initialState });
 
     const bookTitle = await screen.findByText("The Big Boss");
 
