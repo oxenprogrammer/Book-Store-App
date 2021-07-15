@@ -14,10 +14,18 @@ import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "99%",
     "& > *": {
       margin: theme.spacing(1),
-      width: "25ch",
+      width: "100%",
     },
+  },
+  button: {
+    backgroundColor: "#0290ff",
+    color: "#ffffff",
+    fontWeight: "lighter",
   },
 }));
 
@@ -73,7 +81,6 @@ const BooksForm = () => {
           id="category"
           onChange={handleChange}
           onBlur={handleChange}
-          defaultValue="Action"
         >
           {categories.map((cat) => (
             <MenuItem key={cat} value={cat}>
@@ -83,14 +90,14 @@ const BooksForm = () => {
         </Select>
       </FormControl>
       <TextField
-        type="number"
-        id="pages"
-        name="pages"
-        label="Number of Pages"
+        type="text"
+        id="author"
+        name="author"
+        label="Author"
         variant="filled"
         onChange={handleChange}
       />
-      <Button type="submit" variant="contained" color="primary">
+      <Button type="submit" variant="contained" className={classes.button}>
         Add Book
       </Button>
     </form>

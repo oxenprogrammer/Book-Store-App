@@ -1,6 +1,6 @@
 import "./index.css";
 
-import App from "./components/App";
+import Header from "./components/Header";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -15,22 +15,22 @@ const initialState = {
       id: Math.floor(Math.random() * 1000),
       title: "Enter the Dragon",
       category: "Action",
-      pages: 34,
-      read: "No",
+      author: "Emanuel Okello",
+      read: 64,
     },
     {
       id: Math.floor(Math.random() * 1000),
       title: "Eastern Condors",
       category: "History",
-      pages: 74,
-      read: "No",
+      author: "Naava Gladys",
+      read: 46,
     },
     {
       id: Math.floor(Math.random() * 1000),
       title: "The Big Boss",
       category: "Action",
-      pages: 84,
-      read: "Yes",
+      author: "Angelina Alycia",
+      read: 95,
     },
   ],
 };
@@ -47,7 +47,7 @@ const store = createStore(
 ReactDOM.render(
   <StrictMode>
     <Provider store={store}>
-      <App />
+      <Header />
     </Provider>
   </StrictMode>,
   document.getElementById("root")

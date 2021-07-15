@@ -1,19 +1,26 @@
+/* eslint-disable no-unused-vars */
 import { Fragment, useState } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
+import { Grid, Paper, makeStyles } from "@material-ui/core";
 import { changeFilter, removeBook } from "../actions/index";
 import { connect, useDispatch } from "react-redux";
 
 import { Book } from "../components/Book";
 import { CategoryFilter } from "../components/CategoryFilter";
 import { Notification } from "./Notification";
-import Paper from "@material-ui/core/Paper";
+
+const useStyles = makeStyles(() => ({
+  root: {
+    flexGrow: 1,
+    width: "100%",
+    flexDirection: "column",
+    padding: "1rem",
+  },
+  paper: {
+    height: "9rem",
+
+    marginBottom: "0.938rem",
+  },
+}));
 
 const BooksList = ({ books, filter }) => {
   const [notify, setNotify] = useState({
@@ -37,54 +44,44 @@ const BooksList = ({ books, filter }) => {
     dispatch(changeFilter(value));
   };
 
+  const [spacing, setSpacing] = useState(2);
+
+  const classes = useStyles();
+
   return (
     <Fragment>
       <CategoryFilter handleChange={handleFilterChange} />
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Category</TableCell>
-              <TableCell>Pages</TableCell>
-              <TableCell>Completed</TableCell>
-              <TableCell>Remove</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filter === "All"
-              ? books.map((book) => (
-                  <TableRow key={book.id}>
-                    <Book
-                      key={book.id}
-                      id={book.id}
-                      title={book.title}
-                      category={book.category}
-                      pages={book.pages}
-                      read={book.read}
-                      handleRemoveBook={handleRemoveBook}
-                    />
-                  </TableRow>
-                ))
-              : books
-                  .filter((book) => book.category === filter)
-                  .map((book) => (
-                    <TableRow key={book.id}>
-                      <Book
-                        key={book.id}
-                        id={book.id}
-                        title={book.title}
-                        category={book.category}
-                        pages={book.pages}
-                        read={book.read}
-                        handleRemoveBook={handleRemoveBook}
-                      />
-                    </TableRow>
-                  ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Grid container className={classes.root} spacing={2}>
+        {filter === "All"
+          ? books.map((book) => (
+              <Paper xs={12} className={classes.paper} key={book.id}>
+                <Book
+                  key={book.id}
+                  id={book.id}
+                  title={book.title}
+                  category={book.category}
+                  author={book.author}
+                  read={book.read}
+                  handleRemoveBook={handleRemoveBook}
+                />
+              </Paper>
+            ))
+          : books
+              .filter((book) => book.category === filter)
+              .map((book) => (
+                <Paper xs={12} className={classes.paper} key={book.id}>
+                  <Book
+                    key={book.id}
+                    id={book.id}
+                    title={book.title}
+                    category={book.category}
+                    author={book.author}
+                    read={book.read}
+                    handleRemoveBook={handleRemoveBook}
+                  />
+                </Paper>
+              ))}
+      </Grid>
       <Notification notify={notify} setNotify={setNotify} />
     </Fragment>
   );

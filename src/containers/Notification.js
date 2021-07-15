@@ -5,7 +5,8 @@ import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    top: theme.spacing(9),
+    top: theme.spacing(5),
+    right: theme.spacing(14),
   },
 }));
 
