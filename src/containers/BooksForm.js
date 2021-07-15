@@ -97,7 +97,7 @@ const BooksForm = () => {
             id="category"
             onChange={handleChange}
             onBlur={handleChange}
-            defaultValue={"All"}
+            defaultValue={"Action"}
           >
             {categories.map((cat) => (
               <MenuItem key={cat} value={cat}>
