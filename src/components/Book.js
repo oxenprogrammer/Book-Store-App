@@ -104,7 +104,7 @@ export const Book = (props) => {
               className={classes.MuiCircularProgress}
               size={50}
               thickness={3}
-              variant="static"
+              variant="determinate"
               value={read}
             />
           </Grid>
