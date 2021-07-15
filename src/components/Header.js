@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 import {
   AppBar,
   Link,
   Toolbar,
   Typography,
   makeStyles,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 import React, { Fragment, memo } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
@@ -16,13 +19,19 @@ const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: "#ffffff",
     height: "5.938rem",
-    display: "flex",
+    display: "grid",
+    gridTemplateColumns: "auto 40% auto",
   },
   bookStoreCMS: {
     padding: "0 3.75rem 0 4.25rem",
     color: "#0290ff",
     fontSize: "1.8rem",
     fontWeight: "bolder",
+    flexGrow: 1,
+    "@media(max-width: 678px)": {
+      padding: '0 1rem',
+      fontSize: "1.2rem",
+    },
   },
   link: {
     color: "#121212",
@@ -38,22 +47,22 @@ const useStyles = makeStyles(() => ({
   },
   user: {
     color: "#0290ff",
-    marginLeft: "48rem",
-    "@media(max-width: 1024px)": {
-      marginLeft: "10rem",
-    },
   },
 }));
 
 // eslint-disable-next-line react/display-name
 const Header = memo(() => {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const handleMenu = (event) => {
+    setAnchor(event.currentTarget);
+  };
   return (
     <Router>
       <main>
         <AppBar position="static">
           <Toolbar className={classes.root} variant="dense">
-            <Fragment>
               <Typography variant="h6" color="inherit">
                 <Link className={classes.bookStoreCMS} href="#">
                   BookStore CMS
@@ -67,7 +76,6 @@ const Header = memo(() => {
                   Categories
                 </Link>
               </Typography>
-            </Fragment>
             <Icon className={["fas fa-user", classes.user]} />
           </Toolbar>
         </AppBar>
