@@ -13,7 +13,6 @@ import PropTypes from "prop-types";
 const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
-    flexDirection: "row",
     padding: "1rem",
     justifyContent: "space-between",
     width: "100%",
@@ -83,8 +82,8 @@ export const Book = (props) => {
   const classes = useStyles();
   return (
     <Fragment>
-      <Grid xs={12} container className={classes.root}>
-        <Grid>
+      <Grid container className={classes.root}>
+        <Grid item>
           <Typography className={classes.category}>{category}</Typography>
           <Typography className={classes.title}>{title}</Typography>
           <Typography className={classes.author}>{author}</Typography>
@@ -99,7 +98,7 @@ export const Book = (props) => {
             <Button className={classes.author}>Edit</Button>
           </Grid>
         </Grid>
-        <Grid className={classes.read}>
+        <Grid item className={classes.read}>
           <Grid className={classes.readItem}>
             <CircularProgress
               className={classes.MuiCircularProgress}
@@ -115,7 +114,7 @@ export const Book = (props) => {
           </Grid>
         </Grid>
         <Divider orientation="vertical" flexItem />
-        <Grid className={classes.chapter}>
+        <Grid item className={classes.chapter}>
           <Typography className={classes.current}>CURRENT CHAPTER</Typography>
           <Typography className={classes.number}>Chapter 17</Typography>
           <Button className={classes.button} variant="contained">

@@ -6,11 +6,12 @@ import {
   Select,
   TextField,
 } from "@material-ui/core";
+import { Fragment, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 
+import { Notification } from "./Notification";
 import { addBook } from "../actions";
 import { makeStyles } from "@material-ui/core/styles";
-import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,53 +55,67 @@ const BooksForm = () => {
     e.preventDefault();
     dispatch(addBook(book));
     setBook("");
+    setNotify({
+      isOpen: true,
+      message: `Successfully Added New Book`,
+      type: "success",
+    });
   };
+
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
 
   const classes = useStyles();
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={classes.root}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField
-        type="text"
-        id="title"
-        name="title"
-        label="Book Title"
-        variant="filled"
-        onChange={handleChange}
-      />
-      <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel id="category">Category</InputLabel>
-        <Select
-          name="category"
-          labelId="category"
-          id="category"
+    <Fragment>
+      <form
+        onSubmit={handleSubmit}
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          type="text"
+          id="title"
+          name="title"
+          label="Book Title"
+          variant="filled"
           onChange={handleChange}
-          onBlur={handleChange}
-        >
-          {categories.map((cat) => (
-            <MenuItem key={cat} value={cat}>
-              {cat}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        type="text"
-        id="author"
-        name="author"
-        label="Author"
-        variant="filled"
-        onChange={handleChange}
-      />
-      <Button type="submit" variant="contained" className={classes.button}>
-        Add Book
-      </Button>
-    </form>
+        />
+        <FormControl variant="filled" className={classes.formControl}>
+          <InputLabel id="category">Category</InputLabel>
+          <Select
+            name="category"
+            labelId="category"
+            id="category"
+            onChange={handleChange}
+            onBlur={handleChange}
+          >
+            {categories.map((cat) => (
+              <MenuItem key={cat} value={cat}>
+                {cat}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <TextField
+          type="text"
+          id="author"
+          name="author"
+          label="Author"
+          variant="filled"
+          onChange={handleChange}
+        />
+        <Button type="submit" variant="contained" className={classes.button}>
+          Add Book
+        </Button>
+      </form>
+      <Notification notify={notify} setNotify={setNotify} />
+    </Fragment>
   );
 };
 
