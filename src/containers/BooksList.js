@@ -16,8 +16,6 @@ const useStyles = makeStyles(() => ({
     padding: "1rem",
   },
   paper: {
-    height: "9rem",
-
     marginBottom: "0.938rem",
   },
 }));
@@ -36,7 +34,7 @@ const BooksList = ({ books, filter }) => {
     setNotify({
       isOpen: true,
       message: `Successfully Removed the Book with ID ${bookId}`,
-      type: "info",
+      type: "warning",
     });
   };
 
