@@ -11,8 +11,8 @@ const App = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
+       <BooksForm />
       <BooksList />
-      <BooksForm />
     </div>
   );
 };
