@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: "100%",
     },
+    "@media(max-width: 678px)": {
+      flexDirection: "column",
+    },
   },
   button: {
     backgroundColor: "#0290ff",
