@@ -134,7 +134,7 @@ const Header = memo(() => {
                     <Typography variant="h6">Categories</Typography>
                   </MenuItem>
                 </Menu>
-                <Icon className={["fas fa-user", classes.user]} />
+                <Icon className={("fas fa-user", classes.user)} />
               </>
             ) : (
               <>
