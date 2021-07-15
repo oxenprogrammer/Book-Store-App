@@ -85,7 +85,7 @@ const Header = memo(() => {
   return (
     <Router>
       <main>
-        <AppBar position="static">
+        <AppBar position="sticky">
           <Toolbar className={classes.root} variant="dense">
             {isMobile ? (
               <>
